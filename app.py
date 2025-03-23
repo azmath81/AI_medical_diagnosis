@@ -5,7 +5,7 @@ import pandas as pd
 from streamlit_option_menu import option_menu
 
 # Set page configuration
-st.set_page_config(page_title="AI Medical Diagnosis", page_icon="🩺", layout="wide")
+st.set_page_config(page_title="AI Medical Diagnosis", page_icon="🧠", layout="wide")
 
 # Custom CSS Styling
 page_bg_img = f"""
@@ -84,7 +84,7 @@ selected = option_menu(
 
 def predict(model, inputs):
     prediction = model.predict(np.array(inputs).reshape(1, -1))
-    return "✅ No Disease Detected" if prediction[0] == 0 else "⚠️ Disease Detected"
+    return "Positive (Has Disease)" if prediction[0] == 1 else "Negative (No Disease)"
 
 # UI Design
 if selected == "Heart Disease":
@@ -117,7 +117,7 @@ elif selected == "Lung Cancer":
     features = [st.number_input(feature) for feature in [
         "Age", "Smoking", "Yellow Fingers", "Anxiety", "Peer Pressure", "Chronic Disease",
         "Fatigue", "Allergy", "Wheezing", "Alcohol Consumption", "Coughing", "Shortness of Breath",
-        "Swallowing Difficulty", "Chest Pain"
+        "Swallowing Difficulty", "Chest Pain", "Balanced Diet"
     ]]
     
     if st.button("Predict Lung Cancer"):
